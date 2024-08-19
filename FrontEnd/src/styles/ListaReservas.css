@@ -1,0 +1,75 @@
+/* Fondo general de la página */
+body {
+    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Contenedor que centra la tabla */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background-color: #e3f2fd;
+  }
+  
+  /* Título */
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #0d47a1;
+  }
+  
+  /* Tabla */
+  .reservas-table {
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 800px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .reservas-table th, .reservas-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Encabezados de tabla */
+  .reservas-table th {
+    background-color: #2196f3;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Celdas de tabla */
+  .reservas-table td {
+    color: #333;
+  }
+  
+  /* Estilos para hover en las filas */
+  .reservas-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Mensajes de carga y error */
+  .loading, .error, .no-reservations {
+    font-size: 1.2rem;
+    color: #ff5252;
+  }
+  
+  /* Mensaje de error */
+  .error {
+    color: #d32f2f;
+  }
+  
+  /* No hay reservas */
+  .no-reservations {
+    color: #0d47a1;
+  }
+  

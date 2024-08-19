@@ -2,9 +2,12 @@ package com.example.restaurant.Service;
 
 import com.example.restaurant.Entity.Mesa;
 import com.example.restaurant.Repository.MesaRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MesaService {
@@ -33,5 +36,14 @@ public class MesaService {
         mesaActualizada.setOcupada(mesa.isOcupada());
         mesaRepository.save(mesaActualizada);
         return mesaActualizada;
+    }
+
+    public ResponseEntity<Map<String, Boolean>> deleteMesa(Long id){
+        Mesa mesa = mesaRepository.findById(id).orElseThrow(()-> new RuntimeException("Mesa no encontrada"));
+        mesaRepository.delete(mesa);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return ResponseEntity.ok().body(response);
+
     }
 }

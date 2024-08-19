@@ -20,7 +20,7 @@ public class MesaController {
     }
 
     @PostMapping("/mesas")
-    public void addMesa(Mesa mesa){
+    public void addMesa(@RequestBody Mesa mesa){
         mesaService.addMesa(mesa);
     }
 
@@ -30,8 +30,15 @@ public class MesaController {
         return ResponseEntity.ok().body(mesa);
     }
 
+    @PutMapping("/mesas/{id}")
     public ResponseEntity<Mesa> updateMesa(@PathVariable Long id, @RequestBody Mesa mesa){
         Mesa mesaActualizada = mesaService.updateMesa(id, mesa);
         return ResponseEntity.ok().body(mesaActualizada);
+    }
+
+    @DeleteMapping("/mesas/{id}")
+    public ResponseEntity<?> deleteMesa(@PathVariable Long id){
+        mesaService.deleteMesa(id);
+        return ResponseEntity.ok().build();
     }
 }

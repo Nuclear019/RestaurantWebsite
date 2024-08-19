@@ -1,0 +1,56 @@
+/* Estilos para el Navbar */
+.navbar {
+    background-color: #0d47a1;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  /* Logo */
+  .navbar-logo h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: white;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Lista de enlaces del navbar */
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilo para cada enlace */
+  .navbar-links li {
+    display: inline;
+  }
+  
+  .navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+  }
+  
+  /* Efecto hover */
+  .navbar-links a:hover {
+    color: #ffd700; /* Un color dorado para hover */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .navbar-links {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  

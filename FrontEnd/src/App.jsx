@@ -1,16 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './Components/Navbar';
+import ListarReservas from './Components/ListaReservas';
+import NuevaReserva from './Components/NuevaReserva'; // Otros componentes
+import Personal from './Components/Personal';
+import Menu from './Components/Menu';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      Welcome, we are now  developing the app.
-    </>
-  )
-}
+    <Router>
+      <Navbar />
+      <div className="content">
+        <Routes>
+          <Route path="/reservas" element={<ListarReservas />} />
+          <Route path="/nueva-reserva" element={<NuevaReserva />} />
+          <Route path="/personal" element={<Personal />} />
+          <Route path="/menu" element={<Menu />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;
