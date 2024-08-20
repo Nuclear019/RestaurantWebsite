@@ -1,23 +1,55 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import ReservaService from "../services/ReservaService";
-import "../styles/ListaReservas.css";
+import React, { useState } from 'react';
+import axios from 'axios';
+import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import ReservaService from '../services/ReservaService';
+import '../styles/ListaReservas.css';
 
+Modal.setAppElement('#root');
 
- const ListaReservas = () => {
+const ListaReservas = () => {
+  const [reservas, setReservas] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedReserva, setSelectedReserva] = useState(null);
 
-    const [reservas, setReservas] = useState([]);
+  
+useEffect(() => {
+  ReservaService.getAllReservas().then((response) => {
+      setReservas(response.data);
+  }).catch((error) => {
+      console.log(error);
+  });
+}
+, []);
 
-    useEffect(() => {
-        ReservaService.getAllReservas().then((response) => {
-            setReservas(response.data);
-        }).catch((error) => {
-            console.log(error);
-        });
+  const openModal = (reserva) => {
+    setSelectedReserva(reserva);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedReserva(null);
+    setModalIsOpen(false);
+  };
+
+  const handleEliminar = async () => {
+    if (!selectedReserva) return;
+
+    try {
+      await axios.delete(`http://localhost:8080/api/v1/reservas/${selectedReserva.idReserva}`);
+      setReservas(reservas.filter((reserva) => reserva.idReserva !== selectedReserva.idReserva));
+      closeModal(); // Cierra el modal después de eliminar
+    } catch (error) {
+      console.error('Error al eliminar la reserva:', error);
     }
-    , []);
+  };
 
-return (
+  const handleModificar = (idReserva) => {
+    navigate(`/modificar-reserva/${idReserva}`);
+  };
+
+  return (
     <div className="container">
       <h2 className="title">Reservas del Restaurante</h2>
       {reservas.length === 0 ? (
@@ -30,6 +62,7 @@ return (
               <th>Fecha</th>
               <th>Hora</th>
               <th>Número de Personas</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -39,13 +72,63 @@ return (
                 <td>{new Date(reserva.fechaReserva).toLocaleDateString()}</td>
                 <td>{reserva.horaReserva}</td>
                 <td>{reserva.personasReserva}</td>
+                <td>
+                  <button
+                    onClick={() => handleModificar(reserva.idReserva)}
+                    className="btn btn-modify"
+                  >
+                    Modificar
+                  </button>
+                  <button
+                    onClick={() => openModal(reserva)} // Abre el modal de seguridad
+                    className="btn btn-delete"
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Confirmación de Eliminación"
+        style={{
+          content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            padding: '20px',
+            textAlign: 'center',
+          },
+        }}
+      >
+        <h2>¿Estás seguro de que quieres eliminar esta reserva?</h2>
+        <p>
+          <strong>Cliente:</strong> {selectedReserva?.nombreReserva} <br />
+          <strong>Fecha:</strong> {selectedReserva ? new Date(selectedReserva.fechaReserva).toLocaleDateString() : ''} <br />
+          <strong>Hora:</strong> {selectedReserva?.horaReserva} <br />
+          <strong>Número de Personas:</strong> {selectedReserva?.personasReserva}
+        </p>
+        <div>
+          <button onClick={handleEliminar} className="btn btn-confirm-delete">
+            Sí, eliminar
+          </button>
+          <button onClick={closeModal} className="btn btn-cancel">
+            Cancelar
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
 
 export default ListaReservas;
+
+
