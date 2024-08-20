@@ -59,6 +59,8 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>6.4.3.Final</version>
 		</dependency>
+		<!-- For Maven -->
+
 
 
 		<dependency>
@@ -88,6 +90,19 @@
 			<version>1.18.34</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>jakarta.mail</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

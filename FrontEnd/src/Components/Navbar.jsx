@@ -4,8 +4,8 @@ import '../styles/Navbar.css'; // Importamos el archivo CSS para los estilos
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
-        <h2>Restaurante</h2>
+      <div className="navbar-links">
+        <a href="/">Restaurante</a>
       </div>
       <ul className="navbar-links">
         <li>

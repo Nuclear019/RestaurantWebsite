@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import ReservaService from '../services/ReservaService';
 import '../styles/ListaReservas.css';
+import editarImg from '../assets/editar.png';
+import eliminarImg from '../assets/eliminar.png';
+import 'bootstrap/dist/css/bootstrap.css';
 
 Modal.setAppElement('#root');
 
@@ -12,7 +15,7 @@ const ListaReservas = () => {
   const [reservas, setReservas] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedReserva, setSelectedReserva] = useState(null);
-
+  const navigate = useNavigate();
   
 useEffect(() => {
   ReservaService.getAllReservas().then((response) => {
@@ -51,7 +54,7 @@ useEffect(() => {
 
   return (
     <div className="container">
-      <h2 className="title">Reservas del Restaurante</h2>
+      <h2 className="title">Reservas del actuales</h2>
       {reservas.length === 0 ? (
         <p className="no-reservations">No hay reservas disponibles.</p>
       ) : (
@@ -75,16 +78,23 @@ useEffect(() => {
                 <td>
                   <button
                     onClick={() => handleModificar(reserva.idReserva)}
-                    className="btn btn-modify"
+                    className="btn"
+                    
                   >
-                    Modificar
+                    <img 
+                      src={editarImg} 
+                      alt="Editar Reserva"  
+                      className="btn-class"
+                    /> 
+                    
                   </button>
                   <button
                     onClick={() => openModal(reserva)} // Abre el modal de seguridad
                     className="btn btn-delete"
                   >
-                    Eliminar
-                  </button>
+                    <img src src={eliminarImg} alt="" 
+                    className="btn-class" />
+                    </button>
                 </td>
               </tr>
             ))}
@@ -117,10 +127,10 @@ useEffect(() => {
           <strong>Número de Personas:</strong> {selectedReserva?.personasReserva}
         </p>
         <div>
-          <button onClick={handleEliminar} className="btn btn-confirm-delete">
+          <button onClick={handleEliminar} className="btn btn-danger">
             Sí, eliminar
           </button>
-          <button onClick={closeModal} className="btn btn-cancel">
+          <button onClick={closeModal} className="btn btn-cancel btn-secondary">
             Cancelar
           </button>
         </div>

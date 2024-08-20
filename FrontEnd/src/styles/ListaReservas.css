@@ -26,7 +26,7 @@ body {
   /* Tabla */
   .reservas-table {
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     max-width: 800px;
     background-color: #ffffff;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -71,5 +71,11 @@ body {
   /* No hay reservas */
   .no-reservations {
     color: #0d47a1;
+  }
+
+  .btn-class {
+    width: 20px;
+    cursor: pointer;
+    margin: 0 auto;
   }
   

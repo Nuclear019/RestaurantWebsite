@@ -2,6 +2,7 @@ package com.example.restaurant.Controller;
 
 import com.example.restaurant.Entity.Mesa;
 import com.example.restaurant.Entity.Reserva;
+import com.example.restaurant.MailSenderClass;
 import com.example.restaurant.Service.MesaService;
 import com.example.restaurant.Service.ReservaService;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ReservaController {
 
     private ReservaService reservaService;
+    private MailSenderClass mailSenderClass = new MailSenderClass();
     public ReservaController(ReservaService reservaService) {
         this.reservaService = reservaService;
     }
@@ -29,6 +31,7 @@ public class ReservaController {
 
     @PostMapping("/reservas")
     public void addReserva(@RequestBody Reserva reserva){
+        mailSenderClass.sendEmail(reserva);
         reservaService.addReserva(reserva);
     }
 
