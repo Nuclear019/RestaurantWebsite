@@ -92,7 +92,7 @@ useEffect(() => {
                     onClick={() => openModal(reserva)} // Abre el modal de seguridad
                     className="btn btn-delete"
                   >
-                    <img src src={eliminarImg} alt="" 
+                    <img src={eliminarImg} alt="" 
                     className="btn-class" />
                     </button>
                 </td>

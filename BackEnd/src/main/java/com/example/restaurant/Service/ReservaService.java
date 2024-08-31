@@ -6,6 +6,8 @@ import com.example.restaurant.Repository.ReservaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +31,10 @@ public class ReservaService {
 
     public Reserva listarReservaPorId(Long id) {
         return reservaRepository.findById(id).orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
+    }
+
+    public List<Reserva> listarReservaPorFecha(LocalDate fecha) {
+        return reservaRepository.findByFechaReserva(fecha).orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
     }
 
 

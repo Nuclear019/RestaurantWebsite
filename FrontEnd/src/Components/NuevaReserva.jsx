@@ -1,60 +1,115 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Modal from 'react-modal'; // Importamos la librería de modal
-import { useNavigate } from 'react-router-dom';
-import "../styles/NuevaReserva.css"; // Importamos el archivo CSS para los estilos
-// Configuración para accesibilidad
-Modal.setAppElement('#root');
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
+import "../styles/NuevaReserva.css";
+import { TimePicker } from "@hilla/react-components/TimePicker.js";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import TextField from '@mui/material/TextField';
+import { isBefore } from 'date-fns';
+
+Modal.setAppElement("#root");
 
 const NuevaReserva = () => {
-  const [nombre, setNombre] = useState('');
-  const [correo, setCorreo] = useState('');
-  const [fecha, setFecha] = useState('');
-  const [hora, setHora] = useState('');
+  const [nombre, setNombre] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [fecha, setFecha] = useState(null); // Estado para la fecha
+  const [hora, setHora] = useState(""); // Hora ya no se usa directamente
   const [personas, setPersonas] = useState(1);
-  const [modalIsOpen, setModalIsOpen] = useState(false); // Estado del modal
-  const [mensaje, setMensaje] = useState(''); // Mensaje de éxito o error
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [cargando, setCargando] = useState(true);
+  const [currentValue, setCurrentValue] = useState(""); // Estado para el TimePicker
+  const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error para TimePicker
+  const { id } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const obtenerReserva = async () => {
+      try {
+        if (id) {
+          const response = await axios.get(
+            `http://localhost:8080/api/v1/reservas/${id}`
+          );
+          const reserva = response.data;
+          setNombre(reserva.nombreReserva);
+          setCorreo(reserva.correoReserva);
+          setFecha(new Date(reserva.fechaReserva)); // Asegúrate de que sea un objeto Date
+          setCurrentValue(reserva.horaReserva.slice(0, 5)); // Formatear la hora a 'HH:MM'
+          setPersonas(reserva.personasReserva);
+        }
+      } catch (error) {
+        console.error("Error al obtener la reserva:", error);
+        setMensaje("Hubo un problema al obtener la reserva");
+        setModalIsOpen(true);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    obtenerReserva();
+  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const nuevaReserva = {
+    const reserva = {
       nombreReserva: nombre,
       correoReserva: correo,
-      fechaReserva: fecha,
-      horaReserva: hora + ':00', // Asegurarse de enviar con segundos
+      fechaReserva: fecha.toISOString().split('T')[0], // Extraer solo la fecha en formato YYYY-MM-DD
+      horaReserva: currentValue + ":00",
       personasReserva: personas,
       fechaCreacionReserva: new Date().toISOString(),
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/api/v1/reservas', nuevaReserva);
-      if (response.status === 200) {
-        setMensaje('Reserva creada exitosamente');
-        setModalIsOpen(true); // Abrir el modal
-        setNombre('');
-        setCorreo('');
-        setFecha('');
-        setHora('');
+      let response;
+      if (id) {
+        response = await axios.put(
+          `http://localhost:8080/api/v1/reservas/${id}`,
+          reserva
+        );
+        setMensaje("Reserva actualizada exitosamente");
+      } else {
+        response = await axios.post(
+          "http://localhost:8080/api/v1/reservas",
+          reserva
+        );
+        setMensaje("Reserva creada exitosamente");
+        // Limpiar los campos después de crear la reserva
+        setNombre("");
+        setCorreo("");
+        setFecha(null);
+        setCurrentValue("");
         setPersonas(1);
       }
+
+      if (response.status === 200) {
+        setModalIsOpen(true);
+      }
     } catch (error) {
-      console.error('Error al crear la reserva:', error);
-      setMensaje('Hubo un problema al crear la reserva');
+      console.error("Error al procesar la reserva:", error);
+      setMensaje("Hubo un problema al procesar la reserva");
       setModalIsOpen(true);
     }
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
-    navigate('/reservas');
-    setMensaje('');
+    navigate("/reservas");
+    setMensaje("");
   };
+
+  if (cargando) {
+    return <div className="loading">Cargando...</div>;
+  }
 
   return (
     <div className="container">
-      <h2 className="title">Nueva Reserva</h2>
+      <h2 className="title">{id ? "Modificar Reserva" : "Nueva Reserva"}</h2>
       <form onSubmit={handleSubmit} className="form-reserva">
         <div className="form-group">
           <label htmlFor="nombre">Nombre</label>
@@ -81,27 +136,36 @@ const NuevaReserva = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="fecha">Fecha</label>
-          <input
-            type="date"
-            id="fecha"
-            name="fecha"
-            value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
-            required
-            className="form-input"
-          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              value={fecha}
+              onChange={(newValue) => setFecha(newValue)}
+              renderInput={(params) => <TextField {...params} />}
+              shouldDisableDate={(date) => isBefore(date, new Date().setHours(0, 0, 0, 0))}
+            />
+          </LocalizationProvider>
         </div>
         <div className="form-group">
-          <label htmlFor="hora">Hora</label>
-          <input
-            type="time"
-            id="hora"
-            name="hora"
-            value={hora}
-            onChange={(e) => setHora(e.target.value)}
-            required
-            className="form-input"
+          <TimePicker
+            label="Hora"
+            value={currentValue}
+            min="14:00"
+            max="22:30"
+            step={60 * 30} // Intervalos de 30 minutos
+            errorMessage={errorMessage}
+            onValueChanged={(event) => {
+              setCurrentValue(event.detail.value);
+            }}
+            onChange={(event) => {
+              const { min, max, value } = event.target;
+              if (value < min) {
+                setErrorMessage("Too early, choose another time");
+              } else if (value > max) {
+                setErrorMessage("Too late, choose another time");
+              } else {
+                setErrorMessage("");
+              }
+            }}
           />
         </div>
         <div className="form-group">
@@ -115,36 +179,35 @@ const NuevaReserva = () => {
             min="1"
             required
             className="form-input"
+            lang="es"
           />
         </div>
         <button type="submit" className="btn btn-submit">
-          Reservar
+          {id ? "Actualizar" : "Reservar"}
         </button>
       </form>
 
-      {/* Modal de notificación */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Notificación de Reserva"
         style={{
           content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            padding: '20px',
-            textAlign: 'center',
-            borderRadius: '8px',
-            backgroundColor: '#f5f5f5',
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            padding: "20px",
+            textAlign: "center",
+            borderRadius: "8px",
+            backgroundColor: "#f5f5f5",
           },
         }}
       >
         <h2 className="modal-title">{mensaje}</h2>
         <button onClick={closeModal} className="btn btn-close">
-          Cerrar
         </button>
       </Modal>
     </div>
