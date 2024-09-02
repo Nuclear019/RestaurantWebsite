@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import "../styles/NuevaReserva.css";
+import "../../styles/NuevaReserva.css";
 import { TimePicker } from "@hilla/react-components/TimePicker.js";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -59,7 +59,7 @@ const NuevaReserva = () => {
     const reserva = {
       nombreReserva: nombre,
       correoReserva: correo,
-      fechaReserva: fecha.toISOString().split('T')[0], // Extraer solo la fecha en formato YYYY-MM-DD
+      fechaReserva: fecha.toLocaleDateString('en-CA'), // Extraer solo la fecha en formato YYYY-MM-DD
       horaReserva: currentValue + ":00",
       personasReserva: personas,
       fechaCreacionReserva: new Date().toISOString(),

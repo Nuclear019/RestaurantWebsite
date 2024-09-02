@@ -9,9 +9,6 @@ const Navbar = () => {
       </div>
       <ul className="navbar-links">
         <li>
-          <a href="/reservas">Lista de reservas</a>
-        </li>
-        <li>
           <a href="/nueva-reserva">Nueva reserva</a>
         </li>
         <li>
