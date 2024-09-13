@@ -10,6 +10,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import { isBefore } from 'date-fns';
+import Textarea from '@mui/joy/Textarea';
+
 
 Modal.setAppElement("#root");
 
@@ -19,6 +21,7 @@ const NuevaReserva = () => {
   const [fecha, setFecha] = useState(null); // Estado para la fecha
   const [hora, setHora] = useState(""); // Hora ya no se usa directamente
   const [personas, setPersonas] = useState(1);
+  const [detalles, setDetalles] = useState(""); // Estado para los detalles de la reserva
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [cargando, setCargando] = useState(true);
@@ -40,6 +43,7 @@ const NuevaReserva = () => {
           setFecha(new Date(reserva.fechaReserva)); // Asegúrate de que sea un objeto Date
           setCurrentValue(reserva.horaReserva.slice(0, 5)); // Formatear la hora a 'HH:MM'
           setPersonas(reserva.personasReserva);
+          setDetalles(reserva.detallesReserva || ""); // Establecer detalles si están disponibles
         }
       } catch (error) {
         console.error("Error al obtener la reserva:", error);
@@ -63,6 +67,7 @@ const NuevaReserva = () => {
       horaReserva: currentValue + ":00",
       personasReserva: personas,
       fechaCreacionReserva: new Date().toISOString(),
+      detallesReserva: detalles, // Incluir detalles en la reserva
     };
 
     try {
@@ -85,6 +90,7 @@ const NuevaReserva = () => {
         setFecha(null);
         setCurrentValue("");
         setPersonas(1);
+        setDetalles(""); // Limpiar detalles
       }
 
       if (response.status === 200) {
@@ -99,7 +105,7 @@ const NuevaReserva = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-    navigate("/reservas");
+    navigate("/");
     setMensaje("");
   };
 
@@ -182,6 +188,7 @@ const NuevaReserva = () => {
             lang="es"
           />
         </div>
+        <Textarea minRows={2} onChange={(e) => setDetalles(e.target.value)} />
         <button type="submit" className="btn btn-submit">
           {id ? "Actualizar" : "Reservar"}
         </button>
@@ -208,6 +215,7 @@ const NuevaReserva = () => {
       >
         <h2 className="modal-title">{mensaje}</h2>
         <button onClick={closeModal} className="btn btn-close">
+          Cerrar
         </button>
       </Modal>
     </div>

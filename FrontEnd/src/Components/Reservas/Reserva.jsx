@@ -3,9 +3,11 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import editarImg from '../../assets/editar.png';
 import eliminarImg from '../../assets/eliminar.png';
+import { useNavigate } from 'react-router-dom';
 export default function Reserva({ reserva, onReservaEliminada }) {
     const fechaReserva = new Date(reserva.fechaReserva).toLocaleDateString();
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const navigate = useNavigate()
 
     const handleEliminar = async () => {
         try {

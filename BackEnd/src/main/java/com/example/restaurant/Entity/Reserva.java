@@ -20,12 +20,14 @@ public class Reserva implements Serializable {
 
     private Integer personasReserva;
 
+    private String detallesReserva;
 
 
-    public Reserva() {
+
+    public Reserva( ) {
     }
 
-    public Reserva(long idReserva, String nombreReserva, String correoReserva, Date fechaReserva, Time horaReserva, Date fechaCreacionReserva, Integer personasReserva) {
+    public Reserva(long idReserva, String nombreReserva, String correoReserva, Date fechaReserva, Time horaReserva, Date fechaCreacionReserva, Integer personasReserva, String detallesReserva) {
         this.idReserva = idReserva;
         this.nombreReserva = nombreReserva;
         this.correoReserva = correoReserva;
@@ -33,6 +35,7 @@ public class Reserva implements Serializable {
         this.horaReserva = horaReserva;
         this.fechaCreacionReserva = fechaCreacionReserva;
         this.personasReserva = personasReserva;
+        this.detallesReserva = detallesReserva;
     }
 
     public long getIdReserva() {
@@ -91,5 +94,13 @@ public class Reserva implements Serializable {
         this.personasReserva = personasReserva;
     }
 
+
+    public String getDetallesReserva() {
+        return detallesReserva;
+    }
+
+    public void setDetallesReserva(String detallesReserva) {
+        this.detallesReserva = detallesReserva;
+    }
 
 }
