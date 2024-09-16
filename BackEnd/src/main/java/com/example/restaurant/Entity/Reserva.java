@@ -22,12 +22,14 @@ public class Reserva implements Serializable {
 
     private String detallesReserva;
 
-
+    @ManyToOne
+    @JoinColumn(name = "IdMesa")
+    private Mesa mesa;
 
     public Reserva( ) {
     }
 
-    public Reserva(long idReserva, String nombreReserva, String correoReserva, Date fechaReserva, Time horaReserva, Date fechaCreacionReserva, Integer personasReserva, String detallesReserva) {
+    public Reserva(long idReserva, String nombreReserva, String correoReserva, Date fechaReserva, Time horaReserva, Date fechaCreacionReserva, Integer personasReserva, String detallesReserva, Mesa mesa) {
         this.idReserva = idReserva;
         this.nombreReserva = nombreReserva;
         this.correoReserva = correoReserva;
@@ -36,6 +38,7 @@ public class Reserva implements Serializable {
         this.fechaCreacionReserva = fechaCreacionReserva;
         this.personasReserva = personasReserva;
         this.detallesReserva = detallesReserva;
+        this.mesa = mesa;
     }
 
     public long getIdReserva() {
@@ -103,4 +106,11 @@ public class Reserva implements Serializable {
         this.detallesReserva = detallesReserva;
     }
 
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
 }

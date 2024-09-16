@@ -17,14 +17,11 @@ public class Mesa implements Serializable {
     @Column(name = "capacidadMesa")
     private int capacidad;
 
-    @Column(name = "ocupada")
-    private boolean ocupada;
 
     public Mesa() {
     }
     public Mesa(int capacidad, boolean ocupada) {
         this.capacidad = capacidad;
-        this.ocupada = ocupada;
     }
 
     public int getIdMesa() {
@@ -43,11 +40,5 @@ public class Mesa implements Serializable {
         this.capacidad = capacidad;
     }
 
-    public boolean isOcupada() {
-        return ocupada;
-    }
 
-    public void setOcupada(boolean ocupada) {
-        this.ocupada = ocupada;
-    }
 }
