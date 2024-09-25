@@ -63,7 +63,7 @@ const ListaReservas = () => {
               <th>Cliente</th>
               <th>Hora</th>
               <th>Número de Personas</th>
-              <th>Acciones</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

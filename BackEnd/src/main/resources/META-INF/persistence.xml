@@ -13,7 +13,7 @@
         <properties>
             <!-- Configuración de conexión a base de datos. H2 en memoria. -->
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:C:\Users\mikis\Documents\BasesDeDatos\Restaurant DataBase\\restaurant-BBDD" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:C:\Miguel Seoane\Bases Datos\Restaurant DataBase\\restaurant-BBDD" />
             <!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1" />-->
             <property name="jakarta.persistence.jdbc.user" value="" />
             <property name="jakarta.persistence.jdbc.password" value="" />

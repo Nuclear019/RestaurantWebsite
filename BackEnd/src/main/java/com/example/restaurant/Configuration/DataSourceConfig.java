@@ -13,7 +13,7 @@ public class DataSourceConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:file:C:\\Users\\mikis\\Documents\\BasesDeDatos\\Restaurant DataBase\\restaurant-BBDD");
+        dataSource.setUrl("jdbc:h2:file:C:\\Miguel Seoane\\Bases Datos\\Restaurant DataBase\\restaurant-BBDD");
         return dataSource;
     }
 }

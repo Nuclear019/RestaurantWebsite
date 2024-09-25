@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,10 +67,16 @@ public class MesaService {
                 .stream()
                 .map(Reserva::getMesa)
                 .collect(Collectors.toList());
+        List<Mesa> mesasDisponibles = new ArrayList<>();
+        for (Mesa mesa : mesasAdecuadas) {
+            if (!mesasOcupadas.contains(mesa)) {
+                mesasDisponibles.add(mesa);
+            }
+
+        }
+
 
         // Devolver las mesas que no están ocupadas
-        return mesasAdecuadas.stream()
-                .filter(mesa -> !mesasOcupadas.contains(mesa.getIdMesa()))
-                .collect(Collectors.toList());
+        return mesasDisponibles;
     }
 }
