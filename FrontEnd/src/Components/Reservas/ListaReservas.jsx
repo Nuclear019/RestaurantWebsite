@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import Reserva from "./Reserva";
+import ReservaListRow from "./ReservaListRow";
 import "../../styles/ListaReservas.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Calendar } from "rsuite";
@@ -68,7 +68,7 @@ const ListaReservas = () => {
           </thead>
           <tbody>
             {reservas.map((reserva) => (
-              <Reserva
+              <ReservaListRow
                 key={reserva.idReserva}
                 reserva={reserva}
                 fetchReservas={setReservas} // Pasa la función para actualizar las reservas

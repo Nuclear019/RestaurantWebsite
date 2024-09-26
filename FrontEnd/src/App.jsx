@@ -5,6 +5,7 @@ import ListarReservas from './Components/Reservas/ListaReservas';
 import NuevaReserva from './Components/Reservas/NuevaReserva'; // Otros componentes
 import Personal from './Components/Personal';
 import Menu from './Components/Menu';
+import Reserva from './Components/Reservas/Reserva'
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/personal" element={<Personal />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/modificar-reserva/:id" element={<NuevaReserva />} />
+          <Route path='/reserva/:id' element={<Reserva/>}/>
         </Routes>
       </div>
     </Router>
