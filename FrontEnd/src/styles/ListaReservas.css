@@ -9,9 +9,9 @@ body {
   /* Contenedor que centra la tabla */
   .container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin-top: 20%;
+    height: 100%;
     flex-direction: column;
     background-color: #e3f2fd;
   }

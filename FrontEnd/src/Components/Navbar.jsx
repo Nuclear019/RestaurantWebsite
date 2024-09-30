@@ -11,11 +11,9 @@ const Navbar = () => {
         <li>
           <a href="/nueva-reserva">Nueva reserva</a>
         </li>
+
         <li>
-          <a href="/personal">Personal</a>
-        </li>
-        <li>
-          <a href="/menu">Menú</a>
+          <a href="/menu">Carta platos</a>
         </li>
       </ul>
     </nav>

@@ -35,7 +35,7 @@ public class ReservaController {
 
     @PostMapping("/reservas")
     public void addReserva(@RequestBody Reserva reserva){
-        mailSenderClass.confirmReserve(reserva);
+      //  mailSenderClass.confirmReserve(reserva);
         reservaService.addReserva(reserva);
     }
 

@@ -1,0 +1,75 @@
+.menu{
+    display: grid;
+    grid-template-columns: 20%  20%  20%  20% ;
+    width: 100%;
+    justify-content: center;
+}
+.menuItem{
+    margin: 5%;
+}
+
+.menuItem {
+    cursor: pointer;
+    /* Define la transición para el estado normal */
+    transform: scale(1);
+    transition: transform 0.5s;
+}
+
+.menuItem:hover {
+    /* Aplica la escala en el hover */
+    transform: scale(1.1);
+}
+
+
+.actionMenu{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.detailsMenu{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+
+}
+
+.tableMenuDetails{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid rgb(235, 235, 235);
+    font-size: 21px;
+    height: 100%;
+}
+
+.tableMenuDetails th{
+    font-size: larger;
+}
+
+.tableTextDetails{
+  text-align: start;
+  justify-content: start;
+  display: flex;
+  padding: 5%;
+  height: 100%;
+}
+.menuPrice{
+    text-align: end;
+    padding: 5%;
+
+}
+
+@keyframes makeZoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+    0% {
+        transform: scale(1);
+    }
+  
+}

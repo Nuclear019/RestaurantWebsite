@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
@@ -7,7 +8,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
 import Textarea from '@mui/joy/Textarea';
-import { TimePicker } from "@hilla/react-components/TimePicker.js";
+import TimePickerCheckbox from '../Componentes Personalizados/TimePickerCheckbox';
 import { isBefore } from 'date-fns';
 import { useObtenerMesas } from "../../hooks/useObtenerMesas"; // Importa los hooks personalizados
 import { useMesaAsignada } from "../../hooks/useMesaAsignada"; // Importa los hooks personalizados
@@ -31,9 +32,11 @@ const NuevaReserva = () => {
   const { mesasDisponibles, errorMesas } = useObtenerMesas(fecha, currentValue, personas);
   const { reserva, cargando, errorReserva } = useObtenerReserva(id);
   const { mesaAsignada, errorMessage } = useMesaAsignada(mesasDisponibles, fecha, currentValue, personas);
-
+  const handleTimeSelected = (time) => {
+    setHora(time); // Actualiza el estado con la hora seleccionada
+  };
   // Asignación de datos de la reserva obtenida
-  React.useEffect(() => {
+  useEffect(() => {
     if (reserva) {
       setNombre(reserva.nombreReserva);
       setCorreo(reserva.correoReserva);
@@ -148,25 +151,8 @@ const NuevaReserva = () => {
           </LocalizationProvider>
         </div>
         <div className="form-group">
-          <TimePicker
-            label="Hora"
-            value={currentValue}
-            min="14:00"
-            max="22:30"
-            step={60 * 30}
-            errorMessage={errorMessage}
-            onValueChanged={handleTimeChange}
-            onChange={(event) => {
-              const { min, max, value } = event.target;
-              if (value < min) {
-                setErrorMessage("Hora muy temprano");
-              } else if (value > max) {
-                setErrorMessage("Hora muy tarde");
-              } else {
-                setErrorMessage("");
-              }
-            }}
-          />
+        <TimePickerCheckbox onTimeChange={handleTimeSelected} />
+
         </div>
         <div>
           <p>Quedan {mesasDisponibles.length} mesas disponibles para esta hora</p>

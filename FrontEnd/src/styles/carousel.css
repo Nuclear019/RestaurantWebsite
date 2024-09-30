@@ -1,0 +1,31 @@
+.carousel {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #88828288;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 3s ease-in-out;
+  animation: slide 20s infinite;
+}
+
+.carouselItem {
+  min-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 40px;
+}
+
+/* Animación automática de desplazamiento */
+@keyframes slide {
+  0% { transform: translateX(0%); }
+  33% { transform: translateX(-100%); }
+  66% { transform: translateX(-200%); }
+  100% { transform: translateX(0%); }
+  }
+
+

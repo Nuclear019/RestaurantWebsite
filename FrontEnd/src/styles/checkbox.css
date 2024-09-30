@@ -1,0 +1,35 @@
+.time-picker {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+  }
+  
+  .time-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  }
+  
+  .time-checkbox input {
+    display: none; /* Oculta el checkbox original */
+  }
+  
+  .checkbox-button {
+    display: inline-block;
+    padding: 10px 15px; /* Espaciado interno para simular un botón */
+    background-color: #fff; /* Color de fondo del botón */
+    border: 2px solid #ccc; /* Bordes del botón */
+    border-radius: 4px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto */
+    line-height: 1; /* Altura de línea normal */
+    transition: background-color 0.3s, border-color 0.3s; /* Transición suave */
+  }
+  
+  /* Estilos para el botón cuando está seleccionado */
+  .time-checkbox input:checked + .checkbox-button {
+    background-color: #007bff; /* Color de fondo cuando está seleccionado */
+    color: white; /* Color del texto cuando está seleccionado */
+    border-color: #007bff; /* Cambia el color del borde cuando está seleccionado */
+  }
+  
