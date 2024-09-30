@@ -14,13 +14,9 @@ Para poder ejecutar este codigo deberás descargar las dependencias de Java
   - Dependencias de H2Database
   - Dependencias de JUnit
 
-Para el FrontEnd deberas descargar las siguientes librerías para que funcione correctamente:
-  -  npm install react-router-dom
-  -  npm install react-modal
-  -  npm install bootstrap
-  -  npm install react-table-scroll
-  -  npm install @hilla/react-components
-  -  npm install rsuite
+Para el FrontEnd deberás realizar este comando desde la carpeta del proyecto para descargar todas las librerias y dependencias:
+  -  npm install 
+
 
 Por ultimo deberás conectar la base de datos con el BackEnd mediante Hibernate configurando el archivo de persitence.xml
 
