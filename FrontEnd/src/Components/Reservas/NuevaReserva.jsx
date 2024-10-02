@@ -14,6 +14,7 @@ import { useObtenerMesas } from "../../hooks/useObtenerMesas"; // Importa los ho
 import { useMesaAsignada } from "../../hooks/useMesaAsignada"; // Importa los hooks personalizados
 import { useObtenerReserva } from "../../hooks/useObtenerReservas"; // Importa los hooks personalizados
 import "../../styles/NuevaReserva.css";
+import Loading from "../Loading";
 Modal.setAppElement("#root");
 
 const NuevaReserva = () => {
@@ -27,14 +28,12 @@ const NuevaReserva = () => {
   const [detalles, setDetalles] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [mensaje, setMensaje] = useState("");
-  const [currentValue, setCurrentValue] = useState("14");
+  const [currentValue, setCurrentValue] = useState("13:30");
 
   const { mesasDisponibles, errorMesas } = useObtenerMesas(fecha, currentValue, personas);
   const { reserva, cargando, errorReserva } = useObtenerReserva(id);
   const { mesaAsignada, errorMessage } = useMesaAsignada(mesasDisponibles, fecha, currentValue, personas);
-  const handleTimeSelected = (time) => {
-    setHora(time); // Actualiza el estado con la hora seleccionada
-  };
+ 
   // Asignación de datos de la reserva obtenida
   useEffect(() => {
     if (reserva) {
@@ -47,9 +46,8 @@ const NuevaReserva = () => {
     }
   }, [reserva]);
 
-  const handleTimeChange = (event) => {
-    const value = event.detail.value;
-    setCurrentValue(value); // Actualiza el estado de la hora seleccionada
+  const handleTimeChange = (event) => {    
+    setCurrentValue(event); // Actualiza el estado de la hora seleccionada
   };
 
   const handleSubmit = async (event) => {
@@ -107,7 +105,7 @@ const NuevaReserva = () => {
   };
 
   if (cargando) {
-    return <div className="loading">Cargando...</div>;
+    return <Loading/>;
   }
 
   return (
@@ -151,7 +149,7 @@ const NuevaReserva = () => {
           </LocalizationProvider>
         </div>
         <div className="form-group">
-        <TimePickerCheckbox onTimeChange={handleTimeSelected} />
+        <TimePickerCheckbox onTimeChange={handleTimeChange} />
 
         </div>
         <div>

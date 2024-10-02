@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Mesa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idMesa;
+    private long idMesa;
 
     @Column(name = "capacidadMesa")
     private int capacidad;
@@ -24,11 +24,11 @@ public class Mesa implements Serializable {
         this.capacidad = capacidad;
     }
 
-    public int getIdMesa() {
+    public long getIdMesa() {
         return idMesa;
     }
 
-    public void setIdMesa(int idMesa) {
+    public void setIdMesa(long idMesa) {
         this.idMesa = idMesa;
     }
 

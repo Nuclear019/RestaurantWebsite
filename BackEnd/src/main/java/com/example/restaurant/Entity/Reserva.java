@@ -1,5 +1,6 @@
 package com.example.restaurant.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,6 +16,8 @@ public class Reserva implements Serializable {
     private String nombreReserva;
     private String correoReserva;
     private Date fechaReserva;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+
     private Time horaReserva;
     private Date  fechaCreacionReserva;
 

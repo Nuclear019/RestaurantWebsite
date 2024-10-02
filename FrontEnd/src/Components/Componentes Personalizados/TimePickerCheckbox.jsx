@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import "../../styles/checkbox.css";
 
 const TimePickerCheckbox = ({ onTimeChange }) => {
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedTime, setSelectedTime] = useState('13:30');
   const times=["13:30", "15:00", "20:30", "22:00"];
 
   const handleTimeChange = (event) => {
     const newTime = event.target.value;
+    
 
     // Solo actualiza el estado si se selecciona un nuevo checkbox
     if (selectedTime !== newTime) {
@@ -65,4 +66,4 @@ const TimePickerCheckbox = ({ onTimeChange }) => {
   );
 };
 
-export default TimePickerCheckbox;
+export default TimePickerCheckbox ;

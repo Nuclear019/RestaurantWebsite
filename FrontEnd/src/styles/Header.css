@@ -1,0 +1,21 @@
+.homeHeader{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 20px;
+    background-color: #4a4444;
+    color: white;
+    width: 100%;
+    box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.1);
+    cursor: pointer;
+    
+}
+.homeHeader h2{
+    margin: 20px ;
+}
+.content{
+    height: 100vh;
+}
+
+
+

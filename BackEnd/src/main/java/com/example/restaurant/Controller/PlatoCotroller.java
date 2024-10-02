@@ -1,10 +1,8 @@
 package com.example.restaurant.Controller;
 
-import com.example.restaurant.Entity.Plato;
-import com.example.restaurant.Entity.Reserva;
+import com.example.restaurant.Entity.Platos;
 import com.example.restaurant.Service.PlatoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,19 +15,27 @@ public class PlatoCotroller {
     @Autowired
     PlatoService platoService;
 
-    public PlatoCotroller(PlatoService platoService) {
-        this.platoService = platoService;
-    }
 
     @GetMapping("/platos")
-    public ResponseEntity<List<Plato>> getPlatos() {
-        List<Plato> platos = platoService.getPlatos();
-        return ResponseEntity.ok().body(platos);
+    public List<Platos> getPlatos() {
+        List<Platos> platos = platoService.getPlatos();
+        return platos;
     }
 
-    @PostMapping("/add-plato")
-    public void addReserva(@RequestBody Plato plato){
-        platoService.addPlato(plato);
-    }
+    /**
+     *
+     * @PostMapping("/add-plato")
+     *     public void addReserva(@RequestBody Plato plato){
+     *         platoService.addPlato(plato);
+     *     }
+     *
+     *
+     *     @GetMapping("/platos/{idCategoriaPlato}")
+     *     public List<Plato> getPlatosByCategoria(@PathVariable Long idCategoriaPlato) {
+     *         List<Plato> platos = platoService.getPlatosByCategoria(idCategoriaPlato);
+     *         return platos;
+     *     }
+     *
+     */
 
 }

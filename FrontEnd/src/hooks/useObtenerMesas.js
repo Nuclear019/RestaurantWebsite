@@ -9,14 +9,15 @@ export const useObtenerMesas = (fecha, currentValue, personas) => {
     const obtenerMesas = async () => {
       try {
         const formattedDate = fecha.toISOString().split('T')[0];
-        const formattedTime = `${currentValue}:00`;
+        const formattedTime = `${currentValue}`;
 
         const response = await axios.get(`http://localhost:8080/api/v1/mesas/disponibles`, {
           params: {
             fechaReserva: formattedDate,
             horaReserva: formattedTime,
             personas: personas,
-          },
+          }
+          
         });
 
         setMesasDisponibles(response.data);

@@ -1,14 +1,42 @@
 html,body{
     width: 100%;
 }
-.homeHeader{
+
+
+.carouselDiv{
+    margin-top: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    background-color: #4a4444;
-    color: white;
-    width: 100%;
+    padding: 20px;
+    flex-direction: column;
+}
+.carouselTitle{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: start;
+    width: 40%;
+    color: #4a4444;
+
+}
+
+
+.quieneSomosDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+    
+}
+
+.quieneSomosText{
+    width:60%;
+    font-size: 21px;
+    background-color: #f2f2f2;
+    padding: 30px;
+    border-radius: 10px;
     box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.1);
 }
 
@@ -28,5 +56,28 @@ html,body{
     color: white;
     cursor: pointer;
     width:20%;
+    transform: scale(1);
+    transition: transform 0.5s,margin 0.5s;
+
 }
+
+.buttonNavigate:hover{
+    transform: scale(1.1);
+    margin-left:  2% ;
+    margin-right:  2% ;
+
+}
+
+
+.footer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+  
+  margin-top: 10%;
+}
+
+
+
 
