@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface PlatoRepository extends JpaRepository<Platos, Long> {
 
-    @Query("SELECT p FROM Platos p WHERE p.IdPlatoCategoria.idPlatoCategoria = ?1")
-    List<Platos> findAllByPlatoCategoria(Long idCategoriaPlato);
+    @Query("SELECT p FROM Platos p WHERE p.platoCategoria.idPlatoCategoria = ?1")
+    List<Platos> findAllByPlatoCategoriaId(Long idPlatoCategoria);
 
 
 

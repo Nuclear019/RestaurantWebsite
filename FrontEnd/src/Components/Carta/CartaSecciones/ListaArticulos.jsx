@@ -6,10 +6,10 @@ export default function ListaArticulos({idCategoria}) {
 
   const {articulosCarta, setArticulosCarta} = useObtenerPlatosByCat(idCategoria);
 
+  
    
   return (
     <>
-      <h2>Platos principales</h2>
     {
       articulosCarta.length > 0 ? (
 
@@ -18,7 +18,7 @@ export default function ListaArticulos({idCategoria}) {
 
       ) : (
 
-        <h3>No hay platos</h3>
+        <h3>Parece que todavía no hay nada aquí.</h3>
       )
 
         

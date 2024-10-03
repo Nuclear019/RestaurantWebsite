@@ -1,73 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import ListaArticulos from "./CartaSecciones/ListaArticulos";
 import "../../styles/Menu.css";
 import { useObtenerCategoria } from "../../hooks/useObtenerCategoria";
-import { useState } from "react";
+import Loading from "../Loading";
 
+const Carta = () => {
+  const { categorias } = useObtenerCategoria();
+  const [activeTab, setActiveTab] = useState(null);
 
-const Menu = () => {
-  const {categoria , setCategorias} = useObtenerCategoria();
- 
-  
+  // Añadimos un log para ver cuántas veces se renderiza este componente
+  console.log("Renderizando Menu");
+
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
 
-  return (<>
-  {categoria.length > 0 ? (
+  return (
+    <>
+      {categorias.length > 0 ? (
+        <div className="menu">
+          <h2>Carta del restaurante</h2>
 
-<div className="menu">
-<h2>Carta del restaurante</h2>
+          <div className="tabs">
+            {categorias.map((categoria, index) => (
+              <div
+                key={index}
+                onClick={() => handleTabChange(categoria.idPlatoCategoria)}
+                className={activeTab === categoria.idPlatoCategoria ? "active-tab" : ""}
+              >
+                {categoria.categoriaPlato}
+              </div>
+            ))}
+          </div>
 
-<div className="tabs">
-  <div 
-    onClick={() => handleTabChange(categoria[0].categoria)} 
-    className={activeTab === categoria[0].categoria ? 'active-tab' : ''}
-  >
-    Entrantes
-  </div>
-  <div 
-    onClick={() => handleTabChange(categoria[1].categoria)} 
-    className={activeTab === categoria[1].categoria ? 'active-tab' : ''}
-  >
-    Principales
-  </div>
-  <div 
-    onClick={() => handleTabChange(categoria[2].categoria)} 
-    className={activeTab === categoria[2].categoria ? 'active-tab' : ''}
-  >
-    Postres
-  </div>
-  <div 
-    onClick={() => handleTabChange(categoria[3].categoria)} 
-    className={activeTab === categoria[3].categoria ? 'active-tab' : ''}
-  >
-    Bebidas
-  </div>
-</div>
-<div className="tab-content">
-  {activeTab === categoria[0].id &&  <ListaArticulos categoria={1} />}
-  {activeTab === categoria[1].categoria && <ListaArticulos categoria={2} />}
-  {activeTab === categoria[2].categoria && <ListaArticulos categoria={3} />}
-  {activeTab === categoria[3].categoria && <ListaArticulos categoria={4} />}
-
-  
-
-</div>
-</div>
-
-  ):(
-
-      <div>
+          <div className="tab-content">
+            {activeTab !== null && (
+              <ListaArticulos idCategoria={activeTab} />
+            )}
+          </div>
+        </div>
+      ) : (
+        <div>
           <Loading />
-      </div>
-
-  )}
-
-  </>
-    
-   
+        </div>
+      )}
+    </>
   );
 };
 
-export default Menu;
+export default Carta;

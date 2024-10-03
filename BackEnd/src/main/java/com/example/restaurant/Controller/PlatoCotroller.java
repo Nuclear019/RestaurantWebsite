@@ -22,20 +22,17 @@ public class PlatoCotroller {
         return platos;
     }
 
-    /**
-     *
-     * @PostMapping("/add-plato")
-     *     public void addReserva(@RequestBody Plato plato){
-     *         platoService.addPlato(plato);
-     *     }
-     *
-     *
-     *     @GetMapping("/platos/{idCategoriaPlato}")
-     *     public List<Plato> getPlatosByCategoria(@PathVariable Long idCategoriaPlato) {
-     *         List<Plato> platos = platoService.getPlatosByCategoria(idCategoriaPlato);
-     *         return platos;
-     *     }
-     *
-     */
+    @PostMapping("/add-plato")
+          public void addReserva(@RequestBody Platos plato){
+              platoService.addPlato(plato);
+         }
+
+
+    @GetMapping(value = "/platos", name = "platoCategoria", params = "idPlatoCategoria")
+    public List<Platos> getPlatosByCategoria(@RequestParam Long idPlatoCategoria) {
+        return platoService.findAllByPlatoCategoriaId(idPlatoCategoria);
+    }
+
+
 
 }

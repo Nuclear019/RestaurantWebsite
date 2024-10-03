@@ -9,7 +9,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
 import Textarea from '@mui/joy/Textarea';
 import TimePickerCheckbox from '../Componentes Personalizados/TimePickerCheckbox';
-import { isBefore } from 'date-fns';
+import { getDate, isBefore } from 'date-fns';
 import { useObtenerMesas } from "../../hooks/useObtenerMesas"; // Importa los hooks personalizados
 import { useMesaAsignada } from "../../hooks/useMesaAsignada"; // Importa los hooks personalizados
 import { useObtenerReserva } from "../../hooks/useObtenerReservas"; // Importa los hooks personalizados
@@ -95,7 +95,13 @@ const NuevaReserva = () => {
       setModalIsOpen(true);
     }
   };
-
+  const disableSundaysAndPastDates = (date) => {
+    // Deshabilitar domingos y fechas pasadas
+    return (
+      date.getDay() === 0 || // Deshabilitar domingos
+      isBefore(date, new Date().setHours(0, 0, 0, 0)) // Deshabilitar fechas pasadas
+    );
+  };
   const closeModal = () => {
     if (mensaje.includes("exitosamente")) {
       navigate("/");
@@ -142,9 +148,7 @@ const NuevaReserva = () => {
               value={fecha}
               onChange={(newValue) => setFecha(newValue)}
               renderInput={(params) => <TextField {...params} />}
-              shouldDisableDate={(date) =>
-                isBefore(date, new Date().setHours(0, 0, 0, 0))
-              }
+              shouldDisableDate={disableSundaysAndPastDates}
             />
           </LocalizationProvider>
         </div>

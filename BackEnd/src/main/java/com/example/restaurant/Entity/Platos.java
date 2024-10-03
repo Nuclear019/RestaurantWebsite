@@ -20,8 +20,8 @@ public class Platos implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "idPlatoCategoria")
-    private PlatosCategoria IdPlatoCategoria;
-    
+    private PlatosCategoria platoCategoria;
+
     public Platos() {
     }
     
@@ -83,10 +83,10 @@ public class Platos implements Serializable {
     }
 
     public PlatosCategoria getIdPlatoCategoria() {
-        return IdPlatoCategoria;
+        return platoCategoria;
     }
 
     public void setIdPlatoCategoria(PlatosCategoria idPlatoCategoria) {
-        IdPlatoCategoria = idPlatoCategoria;
+        platoCategoria = idPlatoCategoria;
     }
 }

@@ -16,12 +16,12 @@ public class PlatosCategoria implements Serializable {
     }
 
 
-    public Long getIdPlato() {
+    public Long getIdPlatoCategoria() {
         return idPlatoCategoria;
     }
 
-    public void setIdPlato(Long idPlato) {
-        this.idPlatoCategoria = idPlato;
+    public void setIdPlatoCaregoria(Long idPlatoCaregoria) {
+        this.idPlatoCategoria = idPlatoCaregoria;
     }
 
     public String getCategoriaPlato() {

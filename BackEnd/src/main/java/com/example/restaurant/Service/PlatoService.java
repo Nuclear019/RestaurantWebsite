@@ -22,7 +22,7 @@ public class PlatoService {
         platoRepository.save(plato);
     }
 
-    public List<Platos> getPlatosByCategoria(Long idCategoriaPlato) {
-        return platoRepository.findAllByPlatoCategoria(idCategoriaPlato);
+    public List<Platos> findAllByPlatoCategoriaId(Long idPlatoCategoria) {
+        return platoRepository.findAllByPlatoCategoriaId(idPlatoCategoria);
     }
 }
