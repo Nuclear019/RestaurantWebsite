@@ -11,6 +11,9 @@ class PlatosService {
     getPlatoById(platoId) {
         return axios.get(RESERVA_BASE_API_URL + '/' + platoId);
     }
+  getPlatosMasVendido() {
+    return axios.get(RESERVA_BASE_API_URL+"/masVendidos");
+  }
 }
 export default new PlatosService();
 

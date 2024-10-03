@@ -33,6 +33,11 @@ public class PlatoCotroller {
         return platoService.findAllByPlatoCategoriaId(idPlatoCategoria);
     }
 
+    @GetMapping(value = "/platos/masVendidos")
+    public List<Platos> getPlatosByCategoria() {
+        return platoService.findPlatosMasVendidos();
+    }
+
 
 
 }

@@ -20,10 +20,7 @@ export default function Home() {
      
 
       <div className="carouselDiv">
-        <div className="carouselTitle italianno-regular">
-        Lo mas destacado
-
-        </div>
+        
         <Carousel />
       </div>
       <div className="quieneSomosDiv">

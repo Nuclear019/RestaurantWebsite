@@ -18,6 +18,8 @@ public class PlatoService {
         return platoRepository.findAll();
     }
 
+
+
     public void addPlato(Platos plato) {
         platoRepository.save(plato);
     }
@@ -25,4 +27,8 @@ public class PlatoService {
     public List<Platos> findAllByPlatoCategoriaId(Long idPlatoCategoria) {
         return platoRepository.findAllByPlatoCategoriaId(idPlatoCategoria);
     }
+    public List<Platos> findPlatosMasVendidos() {
+        return platoRepository.findAllByMasVendidoTrue();
+    }
+
 }
