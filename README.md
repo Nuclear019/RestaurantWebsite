@@ -4,8 +4,11 @@ El objetivo de esta aplicación es el de mejorar la eficiencia de los restaurant
 - Creado con Springboot y Hibernate (Java) para el desarrollo del BackEnd, creando una api donde se guardan todas las reservas.Esta api está relacionada a una base de datos H2
 
 - Para el FrontEnd empleo React.js donde recojo los datos haciendo consultas a la api y guardandolos en variables.
-  ![DiagramaClases](https://github.com/user-attachments/assets/bf06facd-d191-4cdb-b6bc-58ceb5c834e6)
 
+
+Base de datos empleada
+
+![DiagramaClases](https://github.com/user-attachments/assets/b0c3dc53-3c67-43ca-b80d-3551a1761fb8)
 
 
 Para poder ejecutar este codigo deberás descargar las dependencias de Java
