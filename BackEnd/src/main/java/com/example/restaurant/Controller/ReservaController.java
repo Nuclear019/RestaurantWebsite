@@ -50,6 +50,7 @@ public class ReservaController {
         List<Reserva> reserva = reservaService.listarReservaPorFecha(date);
         System.out.println(reserva);
         return ResponseEntity.ok().body(reserva);
+
     }
 
     @PutMapping("/reservas/{id}")
