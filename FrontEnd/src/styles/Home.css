@@ -46,6 +46,11 @@ html,body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    view-timeline-name: --reveal;
+    animation-name: show;
+    animation-fill-mode: both;
+    animation-timeline: --reveal;
+    animation-range: entry 15% cover 25%;
 }
 .buttonNavigate{
     margin: 10px;
@@ -60,7 +65,10 @@ html,body{
     transition: transform 0.5s,margin 0.5s;
 
 }
-
+.imgButton{
+    max-width: 250px;
+    height: 150px;
+}
 .buttonNavigate:hover{
     transform: scale(1.1);
     margin-left:  2% ;
@@ -81,3 +89,11 @@ html,body{
 
 
 
+@keyframes show{
+    from{
+        opacity: 0; scale: 10%;
+    }
+    to{
+        opacity: 1; scale: 100%;
+    }
+}

@@ -1,10 +1,23 @@
+import { useState,useEffect } from "react";
+
+
 export default function ArticulosCarta({ articuloCarta }) {
+    const [fotoArticulo, setFotoArticulo] = useState("");
+
+    useEffect(() => {
+      if (articuloCarta.imagenPlato) {
+        setFotoArticulo(`data:image/jpeg;base64,${articuloCarta.imagenPlato}`); // Ajusta el tipo de imagen si es necesario
+      } else {
+        setFotoArticulo("https://via.placeholder.com/150x150");
+      }
+    }, [articuloCarta]);
+
     return (
         <>
         <div className="menuProduct">
             <img
             className="productImg"
-            src="https://via.placeholder.com/150x150"
+            src={fotoArticulo}
             alt="Imagen de un plato"
             />
     

@@ -2,7 +2,9 @@ import React from "react";
 import "../../styles/Home.css";
 import { useNavigate } from "react-router-dom";
 import Carousel from "./Carousel";
-1
+import imagenCarta from "../../assets/carta.jpg"
+import imagenReservaMesa from "../../assets/reservar_mesa.jpg"
+
 export default function Home() {
   const navigate = useNavigate();
   const handleClickReserva = () => {
@@ -37,17 +39,19 @@ export default function Home() {
       <div className="actionButtons">
         <div className="buttonNavigate" onClick={handleClickReserva}>
           <img
-            src="https://via.placeholder.com/150x150"
-            alt="Imagen de una mesa"
+          className="imgButton"
+            src={imagenReservaMesa}
+            alt="Reservar mesa"
           />
           <h3>Reserva tu mesa</h3>
         </div>
         <div className="buttonNavigate" onClick={handleClickCarta}>
           <img
-            src="https://via.placeholder.com/150x150"
-            alt="Imagen de una mesa"
+          className="imgButton"
+            src={imagenCarta}
+            alt="Carta del restaurante"
           />
-          <h3>Consulta nuestra carta</h3>
+          <h3>Nuestra carta</h3>
         </div>
       </div>
 

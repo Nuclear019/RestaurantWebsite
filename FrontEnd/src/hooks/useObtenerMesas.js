@@ -19,11 +19,14 @@ export const useObtenerMesas = (fecha, currentValue, personas) => {
           }
           
         });
+        if(response.status==200){
+          setErrorMesas("")
+        }
 
         setMesasDisponibles(response.data);
+
       } catch (error) {
         setErrorMesas("Error al obtener las mesas");
-        console.error("Error al obtener las mesas:", error);
       }
     };
 

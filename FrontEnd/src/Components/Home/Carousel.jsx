@@ -21,17 +21,24 @@ const Carousel = () => {
     <>
       {articulosMejorValorados.length > 0 ? (
         <div className="carouselTitle italianno-regular">
-          Lo mas destacado
+          Lo más destacado
           <div className="carousel">
             <div
               className="carousel-track"
               style={{
+                display: 'flex',
+                transition: 'transform 0.5s ease',
                 transform: `translateX(-${currentSlide * 100}%)`,
-                width: `${articulosMejorValorados.length * 100}%`
+                width: '100%',
               }}
             >
               {articulosMejorValorados.map((articulo, index) => (
-                <CarouselItem key={index} articulo={articulo} />
+                <div 
+                  key={index} 
+                  style={{ width: '100%', flexShrink: 0 }} // Asegúrate de que cada elemento ocupe el 100%
+                >
+                  <CarouselItem articulo={articulo} />
+                </div>
               ))}
             </div>
           </div>

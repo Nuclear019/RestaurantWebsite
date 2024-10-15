@@ -53,7 +53,7 @@ const NuevaReserva = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    if (!mesaAsignada) {
+    if (!mesaAsignada || mesasDisponibles==0) {
       setMensaje("No se puede crear la reserva, no hay mesas disponibles");
       setModalIsOpen(true);
       return;

@@ -25,10 +25,9 @@
   align-items: center; /* Centra verticalmente */
   flex-direction: column; /* Para que el contenido (imagen/texto) esté uno debajo del otro */
 }
-.carouselItem img {
-  max-width: 100%; /* Asegura que la imagen no exceda el contenedor */
-  height: auto; /* Mantiene la proporción */
-  margin-bottom: 10px; /* Espacio entre imagen y texto */
+.carouselImg {
+  max-width: 250px;
+  height: 150px;
 }
 
 .carousel-track:hover {

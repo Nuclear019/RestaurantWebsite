@@ -33,11 +33,19 @@ public class PlatoCotroller {
         return platoService.findAllByPlatoCategoriaId(idPlatoCategoria);
     }
 
+    @PutMapping("/platos/{id}")
+    public void updatePlato(@PathVariable Long id, @RequestBody Platos plato){
+        platoService.updatePlato(id, plato);
+    }
+
     @GetMapping(value = "/platos/masVendidos")
     public List<Platos> getPlatosByCategoria() {
         return platoService.findPlatosMasVendidos();
     }
 
-
+    @DeleteMapping("/platos/{id}")
+    public void deletePlato(@PathVariable Long id){
+        platoService.deletePlato(id);
+    }
 
 }

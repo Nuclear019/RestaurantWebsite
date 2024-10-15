@@ -18,6 +18,14 @@ public class Platos implements Serializable {
 
     private boolean masVendido;
 
+    public PlatosCategoria getPlatoCategoria() {
+        return platoCategoria;
+    }
+
+    public void setPlatoCategoria(PlatosCategoria platoCategoria) {
+        this.platoCategoria = platoCategoria;
+    }
+
     @ManyToOne
     @JoinColumn(name = "idPlatoCategoria")
     private PlatosCategoria platoCategoria;

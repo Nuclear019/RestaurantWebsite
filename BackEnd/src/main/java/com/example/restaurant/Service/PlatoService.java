@@ -31,4 +31,24 @@ public class PlatoService {
         return platoRepository.findAllByMasVendidoTrue();
     }
 
+    public void updatePlato(Long id, Platos plato) {
+        platoRepository.findById(id).ifPresentOrElse(
+                (platoActualizado) -> {
+                    platoActualizado.setNombrePlato(plato.getNombrePlato());
+                    platoActualizado.setDetallesPlato(plato.getDetallesPlato());
+                    platoActualizado.setPrecioPlato(plato.getPrecioPlato());
+                    platoActualizado.setImagenPlato(plato.getImagenPlato());
+                    platoActualizado.setMasVendido(plato.isMasVendido());
+                    platoActualizado.setPlatoCategoria(plato.getPlatoCategoria());
+                    platoRepository.save(platoActualizado);
+                },
+                () -> {
+                    throw new RuntimeException("Plato no encontrado");
+                }
+        );
+    }
+
+    public void deletePlato(Long id) {
+        platoRepository.deleteById(id);
+    }
 }
